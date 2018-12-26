@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:/Users/DieOs/AppData/Local/Programs/Python/Python37-32/",
+    "python.pythonPath": "C:\\Users\\DieOs\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe",
     "git.ignoreLimitWarning": true,
     "editor.formatOnSave": true,
     "python.linting.pep8Enabled": true,
