@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
+import ArticleList from "./ArticleListView";
+import { Card, Form, Button } from "antd";
 
-import { Card } from "antd";
+import CustomFrom from "../components/Form";
 
 class ArticleDetail extends Component {
   state = {
-    articles: {}
+    articles: {},
+    redirect: false
   };
 
   componentDidMount() {
@@ -17,11 +20,34 @@ class ArticleDetail extends Component {
     });
   }
 
+  handleDelete = () => {
+    axios
+      .delete(`http://127.0.0.1:8000/api/${this.state.articles.id}/`)
+      .then(() => this.setState({ redirect: true }));
+  };
+
   render() {
+    if (this.state.redirect) {
+      return <ArticleList />;
+    }
     return (
-      <Card title={this.state.articles.title}>
-        <p>{this.state.articles.content}</p>
-      </Card>
+      <div>
+        <Card title={this.state.articles.title}>
+          <p>{this.state.articles.content}</p>
+        </Card>
+        <CustomFrom
+          req="put"
+          articleID={this.state.articles.id}
+          btnText="Update"
+        />
+        <Form>
+          <Form.Item>
+            <Button onClick={this.handleDelete} type="danger">
+              Delete
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     );
   }
 }
